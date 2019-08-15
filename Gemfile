@@ -72,3 +72,6 @@ gem 'bcrypt', '~> 3.1.11'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
+
+# 環境変数
+gem 'dotenv-rails'

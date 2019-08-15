@@ -1,9 +1,13 @@
 <h1>Users#index</h1>
 <div class="row">
 <% @users.each do |user| %>
-    <div class="col-md-6">
-        <%= user.name %><br>
-        <%= user.email %>
+    <div class="col-md-6" style="border:1px solid gray; padding:10px;">
+        <%= link_to user_path(user) do %>
+            <p>ユーザーID: <%= user.id %></p>
+            <p>ユーザー名: <%= user.username %></p>
+            <p>メールアドレス: <%= user.email %></p>
+            <img src="<%= user.image_path %>">
+        <% end %>
     </div>
 <% end %>
 </div>

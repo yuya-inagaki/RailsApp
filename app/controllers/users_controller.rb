@@ -10,20 +10,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def login
-    @user = User.find_by(email: params[:email])
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      flash[:notice] = "ログインしました"
-      redirect_to(user_path(@user))
-    else
-      @error_message = "メールアドレスまたはパスワードが間違っています"
-      @email = params[:email]
-      @password = params[:password]
-      render("users/login_form")
-    end
-  end
-
   def show
     @user = User.find(params[:id])
   end
@@ -34,7 +20,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(
-      name: params[:name],
+      username: params[:username],
       email: params[:email],
       password: params[:password]
     )
@@ -45,6 +31,27 @@ class UsersController < ApplicationController
       redirect_to(user_path(@user))
     else
       render "new"
+    end
+  end
+
+  def login
+    auth = request.env['omniauth.auth']
+    if auth.present?
+      user = User.find_or_create_from_auth(request.env['omniauth.auth'])
+      session[:user_id] = user.id
+      redirect_to(user_path(user))
+    else #既存パタン
+      @user = User.find_by(email: params[:email])
+      if @user && @user.authenticate(params[:password])
+        session[:user_id] = @user.id
+        flash[:notice] = "ログインしました"
+        redirect_to(user_path(@user))
+      else
+        @error_message = "メールアドレスまたはパスワードが間違っています"
+        @email = params[:email]
+        @password = params[:password]
+        render("users/login_form")
+      end
     end
   end
 

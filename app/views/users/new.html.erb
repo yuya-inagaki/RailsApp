@@ -10,7 +10,7 @@
 
 <%= form_with url: users_path, local: true do |form|  %>
     <p>ユーザー名</p>
-    <%= form.text_field :name, value: params[:name] %>
+    <%= form.text_field :username, value: params[:username] %>
     <p>メールアドレス</p>
     <%= form.text_field :email, value: params[:email] %>
     <p>パスワード</p>

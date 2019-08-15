@@ -1,0 +1,9 @@
+<h1>Users#index</h1>
+<div class="row">
+<% @users.each do |user| %>
+    <div class="col-md-6">
+        <%= user.name %><br>
+        <%= user.email %>
+    </div>
+<% end %>
+</div>

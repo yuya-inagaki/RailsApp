@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
+
+header{
+    width:100%; height:50px; background:yellow;
+}
+
+.form-error{
+    color:red; font-size:12px;
+}
+
+.flash-notice{
+    background:#ff4060; color:white; text-align:center; padding:10px;
+}

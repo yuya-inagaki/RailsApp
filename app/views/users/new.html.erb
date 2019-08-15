@@ -1,0 +1,20 @@
+<h1>Signup</h1>
+
+<% if @user.errors.any? %>
+<% @user.errors.full_messages.each do |message| %>
+  <div class="form-error">
+    <%= message %>
+  </div>
+<% end %>
+<% end %>
+
+<%= form_with url: users_path, local: true do |form|  %>
+    <p>ユーザー名</p>
+    <%= form.text_field :name, value: params[:name] %>
+    <p>メールアドレス</p>
+    <%= form.text_field :email, value: params[:email] %>
+    <p>パスワード</p>
+    <%= form.password_field :password %>
+
+    <%= form.submit %>
+<% end %>

@@ -1,0 +1,16 @@
+<% if @user.errors.any? %>
+<% @user.errors.full_messages.each do |message| %>
+  <div class="form-error">
+    <%= message %>
+  </div>
+<% end %>
+<% end %>
+
+<%= form_with model: @user, local: true do |form|  %>
+    <p>ユーザー名</p>
+    <%= form.text_field :username, value: @user.username %>
+    <p>メールアドレス</p>
+    <%= form.text_field :email, value: @user.email %>
+
+    <%= form.submit %>
+<% end %>

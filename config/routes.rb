@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   # SNSログイン
   get 'auth/:provider/callback', to: 'users#login'
 
-
   resources :users
+  resources :posts
 end

@@ -75,3 +75,6 @@ gem 'omniauth-facebook'
 
 # 環境変数
 gem 'dotenv-rails'
+
+# fontawsome
+gem 'font-awesome-sass', '~> 5.4.1'

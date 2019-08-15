@@ -5,3 +5,7 @@
 <%= @user.email %>
 
 <img src="<%= @user.image_path %>">
+
+<% if @user.id == @current_user.id %>
+<%= link_to "編集", edit_user_path %>
+<% end %>

@@ -1,8 +1,9 @@
 class User < ApplicationRecord
     has_secure_password validations: false
+    validates :password, length:{minimum:6}, confirmation: true, on: :create
     validates :username, presence: true
-    validates :email, presence: true, uniqueness: true, unless: :uid?
-    validates :password, presence: true, unless: :uid?
+    validates :email, presence: true, unless: :uid?
+    validates :email, uniqueness: { case_sensitive: false, message: "このメールアドレスはすでに登録されています" }
 
 
     #auth hashからユーザ情報を取得
@@ -11,9 +12,7 @@ class User < ApplicationRecord
         provider = auth[:provider]
         uid = auth[:uid]
         username = auth[:info][:nickname]
-        puts "ユーザー名#{username}"
         image = auth[:info][:image]
-        #必要に応じて情報追加してください
     
         #ユーザはSNSで登録情報を変更するかもしれので、毎回データベースの情報も更新する
         self.find_or_create_by(provider: provider, uid: uid) do |user|

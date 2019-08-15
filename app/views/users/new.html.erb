@@ -8,13 +8,22 @@
 <% end %>
 <% end %>
 
-<%= form_with url: users_path, local: true do |form|  %>
+<%= form_with model: @user, url: users_path, local: true do |form|  %>
     <p>ユーザー名</p>
-    <%= form.text_field :username, value: params[:username] %>
+    <%= form.text_field :username, value: @user.username %>
     <p>メールアドレス</p>
-    <%= form.text_field :email, value: params[:email] %>
+    <%= form.text_field :email, value: @user.email %>
     <p>パスワード</p>
     <%= form.password_field :password %>
+    <p>パスワード確認</p>
+    <%= form.password_field :password_confirmation %>
 
     <%= form.submit %>
+<% end %>
+
+<%= link_to "/auth/twitter", class: "btn-sns-login twitter" do %>
+  <i class="fab fa-twitter"></i> Twitterアカウントでログイン
+<% end %>
+<%= link_to "/auth/facebook", class: "btn-sns-login facebook" do %>
+  <i class="fab fa-facebook-f"></i> Facebookアカウントでログイン
 <% end %>

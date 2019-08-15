@@ -19,11 +19,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(
-      username: params[:username],
-      email: params[:email],
-      password: params[:password]
-    )
+    @user = User.new(user_params)
     
     if @user.save
       session[:user_id] = @user.id
@@ -61,8 +57,24 @@ class UsersController < ApplicationController
     redirect_to(login_path)
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.username = params[:user][:username]
+    @user.email = params[:user][:email]
+    if @user.save
+      flash[:notice] = "ユーザー情報を変更しました"
+      redirect_to(user_path)
+    else
+      render("users/edit")
+    end
+  end
+
   private
     def user_params
-      params.require(:user).permit(:email, :password)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation)
     end
 end

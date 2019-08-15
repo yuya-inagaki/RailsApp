@@ -15,5 +15,9 @@
     <%= form.submit %>
 <% end %>
 
-<%= link_to "Twitterアカウントでログイン", "/auth/twitter" %>
-<%= link_to "Facebookアカウントでログイン", "/auth/facebook" %>
+<%= link_to "/auth/twitter", class: "btn-sns-login twitter" do %>
+    <i class="fab fa-twitter"></i> Twitterアカウントでログイン
+<% end %>
+<%= link_to "/auth/facebook", class: "btn-sns-login facebook" do %>
+    <i class="fab fa-facebook-f"></i> Facebookアカウントでログイン
+<% end %>
